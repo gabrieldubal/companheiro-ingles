@@ -55,7 +55,7 @@ export async function render(root) {
   const weekly = h("select", [1, 2, 3, 4, 5, 6, 7].map((n) => h("option", { value: n, selected: String(n) === s.weekly_target },
     `${n} ${n === 1 ? "sessão" : "sessões"} por semana`)));
   const minutes = h("select", [10, 15, 20, 30].map((n) => h("option", { value: n, selected: String(n) === s.session_minutes }, `${n} minutos`)));
-  const perDay = h("select", [0, 5, 10, 15, 20, 30].map((n) => h("option", { value: n, selected: String(n) === s.cards_per_day },
+  const perDay = h("select", [0, 5, 10, 15, 20, 30, 40, 50].map((n) => h("option", { value: n, selected: String(n) === (s.cards_per_day || "10") },
     n ? `${n} cartões novos por dia` : "Nenhum cartão novo (só revisões)")));
   const goal = h("input", { type: "text", value: s.goal, placeholder: "Ex.: fazer a entrevista técnica em inglês até março" });
   const profile = h("textarea", { rows: 14 });
@@ -102,7 +102,8 @@ export async function render(root) {
       h("label", { class: "field" }, h("span", "Sessões por semana"), weekly),
       h("label", { class: "field" }, h("span", "Duração de uma sessão"), minutes),
       h("label", { class: "field" }, h("span", "Seu objetivo com o inglês"), goal),
-      h("label", { class: "field" }, h("span", "Cartões novos por dia (as revisões não têm limite)"), perDay)),
+      h("label", { class: "field" }, h("span", "Cartões novos por dia (as revisões não têm limite)"), perDay,
+        h("small", { class: "muted" }, "Cada novo volta umas 5 vezes nas semanas seguintes. Com 20 por dia, as revisões chegam a uns 80 a 120 por dia depois de um mês; na tela Cartões dá para puxar mais 10 num dia só, sem mudar isto."))),
     h("section", { class: "section" }, h("h2", "Voz e microfone"),
       h("p", { class: "soft", style: { margin: "6px 0 16px" } }, "Estes ficam guardados neste navegador."),
       h("label", { class: "field" }, h("span", "Voz do tutor"), voice),

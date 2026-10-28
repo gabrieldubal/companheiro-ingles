@@ -220,8 +220,9 @@ async def ladder_attempt(file: UploadFile = File(...), tag: str = Form(...), wor
 # --- Cartões -------------------------------------------------------------------------------
 
 @router.get("/deck/session")
-def deck_session():
-    return deck.session()
+def deck_session(mais: int = 0):
+    """`mais`: puxa cartões novos além do limite do dia (o botão "Mais novos agora")."""
+    return deck.session(mais)
 
 
 @router.get("/deck")
