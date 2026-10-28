@@ -860,11 +860,17 @@ def score_lesson(key: str, score: int, total: int):
     _exec("UPDATE lessons SET score=?, total=?, done_at=? WHERE key=?", (score, total, _now(), key))
 
 
+def lessons_saved() -> list:
+    """Todas as aulas guardadas, feitas ou não, com o título (a mais recente primeiro)."""
+    rows = _q("SELECT key, content, score, total, done_at, created_at FROM lessons "
+              "ORDER BY COALESCE(done_at, created_at) DESC")
+    return [{"key": r["key"], "title": json.loads(r["content"]).get("title") or r["key"], "score": r["score"],
+             "total": r["total"], "done_at": r["done_at"], "created_at": r["created_at"]} for r in rows]
+
+
 def lessons_done(since: str) -> list:
     """Aulas com o exercício terminado desde `since` (para mostrar na sessão do Progresso)."""
-    rows = _q("SELECT key, content, score, total, done_at FROM lessons WHERE done_at >= ?", (since,))
-    return [{"key": r["key"], "title": json.loads(r["content"]).get("title") or r["key"], "score": r["score"],
-             "total": r["total"], "done_at": r["done_at"]} for r in rows]
+    return [x for x in lessons_saved() if x["done_at"] and x["done_at"] >= since]
 
 
 def lessons_state() -> dict:

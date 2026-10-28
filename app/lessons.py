@@ -61,11 +61,19 @@ def trilha() -> list[dict]:
                       "why": f"saiu diferente em {s['off']} de {s['n']} vezes"})
     for slug, (title, _) in TOPICS.items():
         items.append({"key": f"tema:{slug}", "kind": "tema", "title": title, "why": "tema para entrevistas e calls"})
+    # Aula guardada continua na trilha mesmo quando o padrão ou o som sai dos primeiros
+    # (você corrigiu, ou outros apareceram mais): dá para rever a qualquer hora.
+    listed = {it["key"] for it in items}
+    for saved in db.lessons_saved():
+        kind = saved["key"].partition(":")[0]
+        if saved["key"] not in listed and kind in ("padrao", "som", "tema"):
+            items.append({"key": saved["key"], "kind": kind, "title": saved["title"], "why": "aula guardada"})
     for it in items:
         st = state.get(it["key"])
         it["ready"] = bool(st)
         it["score"] = st["score"] if st else None
         it["total"] = st["total"] if st else None
+        it["done_at"] = st["done_at"] if st else None
     return items
 
 

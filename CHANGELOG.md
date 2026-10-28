@@ -9,7 +9,9 @@ tem aparece em Ajustes, no fim da página.
 - Cartões: dá para escrever a resposta antes de virar. O app confere, marca o que não bateu e
   sugere a nota (Enter aceita). Responder de cabeça continua como opção.
 - Entender: a aula avisa que salvou quando você responde a última pergunta, e as aulas feitas
-  aparecem na sessão, em Progresso.
+  aparecem na sessão, em Progresso, com link para abrir de novo.
+- Entender: toda aula guardada fica na lista, com a data e a nota, mesmo quando o erro ou o som
+  sai dos mais frequentes. "Rever" abre a aula do jeito que estava.
 
 ## 2.1.0 (27/10/2026)
 

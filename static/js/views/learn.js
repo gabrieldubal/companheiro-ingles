@@ -2,7 +2,7 @@
 // Cada aula é feita uma vez com os seus dados e fica guardada; o exercício é corrigido na hora.
 import { track } from "../lib/activity.js";
 import { api } from "../lib/api.js";
-import { clear, h, toast } from "../lib/dom.js";
+import { clear, dayMonth, h, toast } from "../lib/dom.js";
 import * as tts from "../lib/tts.js";
 
 const GROUPS = [["padrao", "Os seus erros de gramática"], ["som", "Os seus sons"], ["tema", "Temas para entrevistas e calls"]];
@@ -19,7 +19,8 @@ async function renderTrilha(root, alive) {
   if (!alive()) return;
   root.append(h("header", h("h1", "Entender"),
     h("p", "Aulas curtas, feitas com os seus dados: a regra em poucas frases, por que o português engana, os seus exemplos, " +
-           "um exercício corrigido na hora e cartões para levar. Dá para fazer em silêncio.")));
+           "um exercício corrigido na hora e cartões para levar. Dá para fazer em silêncio. Toda aula aberta fica guardada: " +
+           "\"Rever\" abre do jeito que estava, sem gastar nada.")));
   const groups = h("div", { class: "groups" });
   root.append(groups);
   for (const [kind, title] of GROUPS) {
@@ -28,7 +29,8 @@ async function renderTrilha(root, alive) {
     groups.append(h("section", { class: "section" }, h("h2", title),
       h("ul", { class: "list", style: { marginTop: "10px" } }, items.map((t) => h("li", { class: "row", style: { justifyContent: "space-between" } },
         h("div", h("p", h("b", t.title)), h("p", { class: "small muted" }, t.why +
-          (t.score != null ? `. Exercício: ${t.score} de ${t.total}.` : t.ready ? ". Aula pronta." : "."))),
+          (t.score != null ? `. Feita em ${dayMonth(t.done_at)}: ${t.score} de ${t.total} no exercício.`
+            : t.ready ? ". Aula pronta, exercício por fazer." : "."))),
         h("a", { class: `btn small${t.score == null ? "" : " secondary"}`, href: href(t.key) }, t.score == null ? "Estudar" : "Rever"))))));
   }
 }
