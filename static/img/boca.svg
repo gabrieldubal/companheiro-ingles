@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 270">
+  <!-- Corte da boca de perfil, o desenho dos livros de fonética, com a língua na posição do θ:
+       a ponta entre os dentes, o ar saindo por cima dela. Máscara: o CSS pinta com a cor do tema. -->
+  <g fill="none" stroke="#000" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <!-- o rosto, da testa ao pescoço -->
+    <path d="M58 12 C118 2 170 26 184 72 C190 96 186 112 198 132 C214 142 224 154 214 162 C205 167 195 165 190 172 C186 180 194 186 190 192"/>
+    <path d="M188 204 C198 210 196 222 184 228 C180 240 184 250 168 258 C148 268 118 262 98 256 L86 266"/>
+    <!-- nuca e garganta -->
+    <path d="M58 12 C46 40 44 80 50 120 C54 150 54 190 56 232 L62 262"/>
+    <!-- dentes de cima e de baixo -->
+    <path d="M176 186 L177 199 M172 212 L173 201"/>
+    <!-- o céu da boca, do dente ao véu, e a úvula -->
+    <path d="M172 184 C150 152 112 144 82 152 C70 156 66 166 64 178 C63 186 60 190 58 192"/>
+    <!-- a língua: o dorso sobe e a ponta sai entre os dentes -->
+    <path d="M70 238 C90 200 130 180 171 193 L185 198 C170 206 134 214 104 226 C92 231 80 236 70 238 Z"/>
+    <!-- o ar: sai por cima da ponta da língua -->
+    <path d="M150 178 C160 176 170 177 182 176" stroke-dasharray="3 5"/>
+    <path d="M196 172 C206 170 214 166 222 160" stroke-dasharray="3 5"/>
+  </g>
+</svg>
