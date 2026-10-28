@@ -209,12 +209,13 @@ def summary(now: datetime | None = None) -> dict:
     }
 
 
-def session() -> dict:
+def session(extra: int = 0) -> dict:
+    """A sessão de hoje. `extra`: cartões novos além do limite do dia, quando você pede mais."""
     sync()
     now = datetime.now()
     start, end = day_bounds(now)
     due = db.cards_due(_iso(end), _iso(now + SOON))
-    new = db.cards_new(max(per_day() - db.new_cards_seen(_iso(start)), 0))
+    new = db.cards_new(max(per_day() - db.new_cards_seen(_iso(start)), 0) + max(0, min(extra, 50)))
     # Primeiro o que está em aprendizado e as revisões; os novos vêm depois, um a cada três.
     queue, news = list(due), list(new)
     mixed = []

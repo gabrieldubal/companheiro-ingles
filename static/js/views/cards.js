@@ -275,9 +275,31 @@ export async function render(root, [mode], alive) {
     }
   }
 
+  // Acabou a fila do dia, mas há novos esperando: dá para puxar mais 10 agora, além do limite.
+  async function more(btn) {
+    btn.disabled = true;
+    btn.textContent = "Puxando…";
+    try {
+      const r = await api("/api/deck/session?mais=10");
+      if (!alive()) return;
+      const ids = new Set(queue.map((c) => c.id));
+      const fresh = r.cards.filter((c) => c.state === "new" && !ids.has(c.id) && !seen.has(c.id));
+      if (!fresh.length) { toast("Não sobrou cartão novo para puxar."); return; }
+      data.summary = r.summary;
+      queue.push(...fresh);
+      total += fresh.length;
+      show();
+    } catch (e) {
+      toast(e.message);
+      btn.disabled = false;
+      btn.textContent = "Mais 10 novos agora";
+    }
+  }
+
   function finish() {
     current = null;
     const s = data.summary;
+    const waiting = s.counts.new; // novos que ainda não apareceram nenhuma vez
     clear(stage,
       h("h2", done ? "Feito por hoje" : (s.counts.total ? "Nada para revisar agora" : "O baralho ainda está vazio")),
       h("p", { class: "soft", style: { marginTop: "8px" } }, s.counts.total
@@ -285,8 +307,15 @@ export async function render(root, [mode], alive) {
           (s.tomorrow ? `Amanhã ${s.tomorrow === 1 ? "volta 1 cartão" : `voltam ${s.tomorrow} cartões`}.` : "Amanhã não há revisões marcadas.") +
           (s.retention != null && s.retention_n >= 10 ? ` Nos últimos 30 dias você lembrou ${pct(s.retention)} das revisões.` : "")
         : "Os cartões nascem sozinhos das correções das conversas e das palavras novas. Converse uma vez, ou crie um cartão."),
+      waiting ? h("div", { class: "tip", style: { marginTop: "18px" } },
+        h("p", h("b", `${plural(waiting, "cartão novo esperando", "cartões novos esperando")}. `),
+          `O limite de hoje (${s.per_day} novos) já foi. Dá para puxar mais agora, ou mudar o limite por dia em Ajustes. ` +
+          "Cada novo volta umas 5 vezes nas semanas seguintes: 10 novos por dia viram uns 40 a 60 por dia depois de um mês."),
+        h("div", { class: "row", style: { marginTop: "10px" } },
+          h("button", { class: "btn", type: "button", onclick: (e) => more(e.currentTarget) }, "Mais 10 novos agora"),
+          h("a", { class: "btn secondary small", href: "#/ajustes" }, "Mudar o limite por dia"))) : null,
       h("div", { class: "row section", style: { marginTop: "22px" } },
-        h("a", { class: "btn", href: "#/hoje" }, "Voltar para hoje"),
+        h("a", { class: waiting ? "btn secondary" : "btn", href: "#/hoje" }, "Voltar para hoje"),
         h("a", { class: "btn secondary", href: "#/cartoes/todos" }, s.counts.total ? "Ver todos os cartões" : "Criar um cartão")),
       undoLink());
   }

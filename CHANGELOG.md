@@ -20,6 +20,9 @@ tem aparece em Ajustes, no fim da página.
 - Identidade visual (`IDENTIDADE.md`): o conceito "caderno de campo da fala", a marca nova (o θ
   com a barra virando a onda de uma voz), as cores, os tipos, os motivos e as regras. O ícone do
   app e o selo do menu passam a usar a marca nova (o antigo era um balão com "EN").
+- Cartões: quando a fila do dia acaba e há novos esperando, a tela diz quantos são e tem o botão
+  "Mais 10 novos agora", além do limite do dia. Em Ajustes, o limite vai até 50 por dia, com uma
+  conta de quanto isso vira de revisão.
 
 ## 2.1.0 (27/10/2026)
 
