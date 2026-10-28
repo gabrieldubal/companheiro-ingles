@@ -6,6 +6,9 @@ responde dúvidas com os seus dados e monta uma sessão por dia com o que mais p
 Cada pessoa roda no próprio computador, com os próprios dados; para passar aos amigos, veja
 "Para os amigos".
 
+O visual segue o `IDENTIDADE.md` (o conceito, a marca, as cores, os tipos e os motivos): leia antes
+de mexer em qualquer tela.
+
 ## Como usar
 
 Dê dois cliques em `run.bat`. O navegador abre em `http://localhost:8790`, já com o código
