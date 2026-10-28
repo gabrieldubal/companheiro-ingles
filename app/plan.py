@@ -389,7 +389,7 @@ def study_sessions(days: int = 60, limit: int = 40) -> list[dict]:
             "practice": {"n": len(pr), "ok": sum(p["ok"] for p in pr)},
             "cards": {"n": len(rv), "ok": sum(1 for r in rv if r["rating"] > 1)},
             "listen": {"n": len(tr), "ok": sum(t["ok"] for t in tr)},
-            "lessons": [{"title": x["title"], "score": x["score"], "total": x["total"]} for x in ls],
+            "lessons": [{"key": x["key"], "title": x["title"], "score": x["score"], "total": x["total"]} for x in ls],
             "conversations": [{"title": tutor.scenarios().get(c["scenario"], {}).get("title", c["scenario"]),
                                "words": c["words"], "errors": c["errors"],
                                "errors_per_100": round(100 * c["errors"] / c["words"], 1) if c["words"] else None}

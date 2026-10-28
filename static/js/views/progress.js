@@ -136,7 +136,8 @@ function sessionItem(s, older) {
   if (s.practice.n) lines.push(h("p", `Fale certo: ${s.practice.ok} de ${s.practice.n}.`));
   if (s.cards.n) lines.push(h("p", `Cartões: lembrou ${s.cards.ok} de ${s.cards.n}.`));
   if (s.listen.n) lines.push(h("p", `Ouvido: acertou ${s.listen.ok} de ${s.listen.n} palavras.`));
-  (s.lessons || []).forEach((l) => lines.push(h("p", `Entender: ${l.title} (exercício ${l.score} de ${l.total}).`)));
+  (s.lessons || []).forEach((l) => lines.push(h("p", "Entender: ",
+    h("a", { href: `#/entender/${encodeURIComponent(l.key)}` }, l.title), ` (exercício ${l.score} de ${l.total}).`)));
   s.conversations.forEach((c) => lines.push(h("p", `Conversa (${c.title}): ${c.words.toLocaleString("pt-BR")} palavras` +
     (c.errors_per_100 != null ? `, ${String(c.errors_per_100).replace(".", ",")} erros a cada 100.` : "."))));
   return h("li",

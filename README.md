@@ -99,7 +99,9 @@ O `LEIA-ME.txt` do pacote é o passo a passo para o amigo.
   (do caderno ou do detector), exemplos novos do seu mundo, um exercício de escolha corrigido na
   hora, cartões para levar e links para praticar falando. Fica guardada; "Refazer a aula" pede
   outra. Não tem botão de salvar: a nota vai sozinha quando você responde a última pergunta (a
-  tela confirma), e a aula aparece na sessão do Progresso. Em Meus erros, cada padrão tem o link
+  tela confirma), e a aula aparece na sessão do Progresso, com link. Toda aula guardada continua
+  na lista de Entender, com data e nota, mesmo quando o padrão ou o som sai dos mais frequentes
+  ("Rever" abre a aula guardada, sem chamar o Claude). Em Meus erros, cada padrão tem o link
   "Entender".
 - **Cartões** (`#/cartoes`). Revisão com repetição espaçada, como no Anki. Os cartões nascem
   sozinhos: cada correção das conversas (frente: o que você disse; verso: a versão certa e o
