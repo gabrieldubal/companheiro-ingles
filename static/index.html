@@ -10,6 +10,15 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="Inglês">
   <title>Companheiro de inglês</title>
+  <script>
+    // O tema antes de pintar (sem piscar): o escolhido no menu ou em Ajustes, ou o do sistema.
+    (function () {
+      var c = "auto";
+      try { c = JSON.parse(localStorage.getItem("ci.theme")) || "auto"; } catch (e) {}
+      var dark = c === "dark" || (c === "auto" && matchMedia("(prefers-color-scheme: dark)").matches);
+      document.documentElement.dataset.theme = dark ? "dark" : "light";
+    })();
+  </script>
   <link rel="stylesheet" href="css/app.css">
 </head>
 <body>
@@ -26,8 +35,12 @@
     <symbol id="i-progresso" viewBox="0 0 24 24"><path d="M4 19.5h16M6.5 16l4-5 3 3 4.5-6.5"/></symbol>
     <symbol id="i-historico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></symbol>
     <symbol id="i-ajustes" viewBox="0 0 24 24"><path d="M5 7h9M18 7h1M5 17h1M10 17h9"/><circle cx="16" cy="7" r="2"/><circle cx="8" cy="17" r="2"/></symbol>
+    <symbol id="i-sol" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M5.3 18.7l1.4-1.4M17.3 6.7l1.4-1.4"/></symbol>
+    <symbol id="i-lua" viewBox="0 0 24 24"><path d="M19.5 14.5A7.5 7.5 0 0 1 9.5 4.5a7.5 7.5 0 1 0 10 10z"/></symbol>
     <symbol id="i-mais" viewBox="0 0 24 24"><circle cx="6" cy="12" r="1.2"/><circle cx="12" cy="12" r="1.2"/><circle cx="18" cy="12" r="1.2"/></symbol>
   </svg>
+  <!-- O fundo: os símbolos dos sons, em contorno, no canto. ə é o som mais comum do inglês. -->
+  <div class="backdrop" aria-hidden="true"><span class="g1">ə</span><span class="g2">θ</span><span class="g3">æ</span><span class="g4">ɪ</span></div>
   <div class="app">
     <!-- "extra": some do menu de baixo no celular e aparece na tela "Mais" -->
     <nav class="rail" aria-label="Navegação">
@@ -47,6 +60,7 @@
       <a class="nav extra" href="#/historico"><svg aria-hidden="true"><use href="#i-historico"/></svg><span>Histórico</span></a>
       <a class="nav extra settings" href="#/ajustes"><svg aria-hidden="true"><use href="#i-ajustes"/></svg><span>Ajustes</span></a>
       <a class="nav more" href="#/mais"><svg aria-hidden="true"><use href="#i-mais"/></svg><span>Mais</span></a>
+      <button class="theme-toggle" id="theme-toggle" type="button"><svg aria-hidden="true"><use href="#i-sol"/></svg><span>Tema claro</span></button>
       <p class="status" id="status" role="status"></p>
     </nav>
     <main id="view" class="view" tabindex="-1"></main>

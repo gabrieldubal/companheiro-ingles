@@ -46,12 +46,16 @@
      parecia crua), e a linha da voz no alto de cada tela. */
   --bg-top: #F5F8F4;
   --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .1 0 0 0 0 .16 0 0 0 0 .22 0 0 0 .1 0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23g)'/%3E%3C/svg%3E");
-  --voice-alpha: .17;
+  --voice-alpha: .11;
+  --spectro-alpha: .13;
+  --glyph-alpha: .2;
+  --glow-cool: rgba(31, 107, 79, .08);
+  --glow-warm: rgba(227, 178, 60, .12);
   color-scheme: light;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
+/* Escuro: escolhido no menu ou em Ajustes, ou o do sistema (o index.html decide antes de pintar). */
+:root[data-theme="dark"] {
     --bg: #121A22;
     --surface: #1A2530;
     --surface-2: #213040;
@@ -72,16 +76,34 @@
     --chart-grid: #2A3846;
     --bg-top: #182430;
     --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .9 0 0 0 0 .95 0 0 0 0 .92 0 0 0 .07 0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23g)'/%3E%3C/svg%3E");
-    --voice-alpha: .26;
+    --voice-alpha: .13;
+    --spectro-alpha: .15;
+    --glyph-alpha: .22;
+    --glow-cool: rgba(95, 185, 142, .07);
+    --glow-warm: rgba(233, 194, 94, .06);
     color-scheme: dark;
-  }
 }
 
 * { box-sizing: border-box; }
 html { font-size: 17px; }
 body { margin: 0; color: var(--ink); font: 400 var(--step-0)/1.5 var(--sans);
        background-color: var(--bg); background-attachment: fixed;
-       background-image: var(--grain), linear-gradient(180deg, var(--bg-top) 0, var(--bg) 520px); }
+       background-image: var(--grain),
+         radial-gradient(70vw 60vh at 100% 100%, var(--glow-warm), transparent 70%), /* luz de ipê, embaixo */
+         radial-gradient(60vw 50vh at 0 0, var(--glow-cool), transparent 70%),      /* luz de mata, no alto */
+         linear-gradient(180deg, var(--bg-top) 0, var(--bg) 520px); }
+/* Os símbolos dos sons, em contorno, no canto de baixo: fixos, atrás de tudo, longe do meio da tela. */
+.backdrop { position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; user-select: none;
+             /* some em direção ao meio da tela: o texto fica sempre no limpo */
+             -webkit-mask-image: radial-gradient(farthest-corner at 100% 100%, #000 16%, rgba(0, 0, 0, .5) 38%, transparent 62%);
+             mask-image: radial-gradient(farthest-corner at 100% 100%, #000 16%, rgba(0, 0, 0, .5) 38%, transparent 62%); }
+.backdrop span { position: absolute; font-family: var(--serif); line-height: 1; color: transparent;
+                 -webkit-text-stroke: 1.2px var(--mata); opacity: var(--glyph-alpha); }
+.backdrop .g1 { font-size: clamp(300px, 30vw, 560px); right: 2vw; bottom: -0.16em; }
+.backdrop .g2 { font-size: clamp(100px, 9vw, 170px); right: 27vw; bottom: 2vh; }
+.backdrop .g3 { font-size: clamp(80px, 6.5vw, 120px); right: 5vw; bottom: 50vh; }
+.backdrop .g4 { font-size: clamp(64px, 5vw, 100px); right: 22vw; bottom: 30vh; }
+.app { position: relative; z-index: 1; }
 button, input, select, textarea { font: inherit; color: inherit; }
 button { cursor: pointer; }
 button:disabled { opacity: .45; cursor: default; }
@@ -119,13 +141,18 @@ p { margin: 0; max-width: 68ch; }
                                     box-shadow: inset 3px 0 0 var(--mata); }
 .rail a.nav[aria-current="page"] svg { opacity: 1; color: var(--mata); }
 .rail a.nav.settings { margin-top: 12px; }
-.rail .status { margin-top: auto; padding: 0 12px; font-size: var(--step--1); color: var(--ink-3); }
+.rail .theme-toggle { margin-top: auto; display: flex; align-items: center; gap: 10px; padding: 8px 12px; border: 0;
+                     border-radius: 8px; background: none; color: var(--ink-3); font-size: .82rem; text-align: left; }
+.rail .theme-toggle svg { width: 1.05rem; height: 1.05rem; fill: none; stroke: currentColor; stroke-width: 1.7;
+                          stroke-linecap: round; stroke-linejoin: round; }
+.rail .theme-toggle:hover { background: var(--surface-2); color: var(--ink); }
+.rail .status { margin-top: 6px; padding: 0 12px; font-size: var(--step--1); color: var(--ink-3); }
 .rail .status:empty { display: none; }
 .rail a.nav.more { display: none; } /* "Mais" só existe no celular */
 
 /* O conteúdo acompanha a tela (até 2000 px, depois centraliza). As colunas de cada tela
    dependem da largura do conteúdo, não do monitor: por isso o contêiner "view". */
-.view { padding: clamp(24px, 2.4vw, 48px) clamp(18px, 3.4vw, 72px) 80px; max-width: 2000px; width: 100%;
+.view { padding: clamp(24px, 2.4vw, 48px) clamp(18px, 3.4vw, 72px) 160px; max-width: 2000px; width: 100%;
         margin-inline: auto; outline: none; container: view / inline-size; position: relative; }
 /* A linha da voz: o traço de uma frase falada, uma rajada por palavra, no alto de cada tela.
    É uma máscara (img/voz.svg) pintada com a cor do tema; o conteúdo fica por cima. */
@@ -133,8 +160,13 @@ p { margin: 0; max-width: 68ch; }
                 background: var(--mata); opacity: var(--voice-alpha);
                 -webkit-mask: url("../img/voz.svg") 0 0 / max(100%, 1100px) 100% no-repeat;
                 mask: url("../img/voz.svg") 0 0 / max(100%, 1100px) 100% no-repeat; } /* estreita, corta em vez de espremer */
+/* No pé de cada página, o espectrograma da mesma frase: as faixas das vogais e o chiado do θ, s e f. */
+.view::after { content: ""; position: absolute; left: 0; right: 0; bottom: 22px; height: 104px; pointer-events: none;
+               background: var(--mata); opacity: var(--spectro-alpha);
+               -webkit-mask: url("../img/espectro.svg") 0 0 / max(100%, 1100px) 100% no-repeat;
+               mask: url("../img/espectro.svg") 0 0 / max(100%, 1100px) 100% no-repeat; }
 .view > * { position: relative; }
-@media (prefers-contrast: more) { .view::before { display: none; } }
+@media (prefers-contrast: more) { .view::before, .view::after, .backdrop { display: none; } }
 .page > header { margin-bottom: 28px; }
 .page > header p { margin-top: 8px; color: var(--ink-2); }
 
@@ -415,7 +447,10 @@ details.table-view summary { color: var(--ink-3); font-size: var(--step--1); cur
           background: var(--surface); /* barra de baixo sólida: o conteúdo passa por trás dela */
           padding: 6px 6px calc(6px + env(safe-area-inset-bottom)); border-right: 0; border-top: 1px solid var(--line);
           overflow-x: auto; gap: 0; }
-  .brand, .rail .status, .rail .group { display: none; }
+  .brand, .rail .status, .rail .group, .rail .theme-toggle { display: none; }
+  .view::after { display: none; }
+  .backdrop .g2, .backdrop .g3, .backdrop .g4 { display: none; }
+  .backdrop .g1 { font-size: 280px; right: -10px; bottom: 40px; opacity: calc(var(--glyph-alpha) * .6); }
   /* 5 itens que cabem na largura; o resto fica em "Mais". Ícone em cima, nome embaixo. */
   .rail { justify-content: space-around; overflow-x: visible; }
   .rail a.nav { flex-direction: column; gap: 3px; white-space: nowrap; padding: 6px 8px; font-size: 12px;

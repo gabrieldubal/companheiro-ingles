@@ -29,7 +29,8 @@ Entender      Aulas curtas sobre os seus erros, com exercício.
 Perguntar     Dúvidas de inglês. Ele também cria cartões e ajusta o seu treino.
 Meus erros    Tudo o que o app anotou, com a sua gravação de prova.
 Progresso     Os minutos de cada sessão e como cada som está mudando.
-Ajustes       Meta da semana, duração da sessão, voz do tutor e o seu perfil.
+Ajustes       Meta da semana, duração da sessão, voz do tutor, o seu perfil e o tema
+              (claro ou escuro; o botão no pé do menu também troca).
 
 DICAS
 - Comece pela Leitura em voz alta: é com ela que o app descobre os seus sons.

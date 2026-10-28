@@ -1,7 +1,8 @@
 // Ajustes: a sua semana e o objetivo, a voz, o perfil que o tutor lê e o vocabulário do Whisper.
 import { api } from "../lib/api.js";
-import { h, toast } from "../lib/dom.js";
+import { clear, h, toast } from "../lib/dom.js";
 import { get, set } from "../lib/store.js";
+import * as theme from "../lib/theme.js";
 import * as tts from "../lib/tts.js";
 
 function localCheck(key, fallback, label) {
@@ -36,6 +37,16 @@ function connection(s) {
     h("p", { class: "soft small", style: { margin: "6px 0 10px" } },
       "Se quem te passou o app mandar um código novo (começa com CI1-), cole aqui. O app testa antes de trocar."),
     h("label", { class: "field" }, code), btn);
+}
+
+// Aparência: do sistema, claro ou escuro (guardado neste navegador).
+function appearance() {
+  const box = h("div", { class: "mode-switch", role: "group", "aria-label": "Tema" });
+  const draw = () => clear(box, [["auto", "Do sistema"], ["light", "Claro"], ["dark", "Escuro"]].map(([v, label]) =>
+    h("button", { type: "button", "aria-pressed": String(theme.choice() === v), onclick: () => { theme.choose(v); draw(); } }, label)));
+  draw();
+  return h("section", { class: "section" }, h("h2", "Aparência"),
+    h("p", { class: "soft", style: { margin: "6px 0 12px" } }, "O tema fica guardado neste navegador. O botão no pé do menu troca rápido."), box);
 }
 
 export async function render(root) {
@@ -98,7 +109,8 @@ export async function render(root) {
       h("label", { class: "field" }, h("span", h("span", "Velocidade da fala: "), rateLabel), rate),
       localCheck("autoSpeak", true, "Ler as respostas do tutor em voz alta"),
       localCheck("review", false, "Revisar a transcrição antes de enviar"),
-      localCheck("saveAudio", true, "Guardar os áudios das conversas neste computador (o detector de pronúncia precisa deles)"))),
+      localCheck("saveAudio", true, "Guardar os áudios das conversas neste computador (o detector de pronúncia precisa deles)")),
+    appearance()),
     h("div",
     h("section", h("h2", "Perfil"),
       h("p", { class: "soft", style: { margin: "6px 0 16px" } }, "O tutor lê isto no começo de cada conversa para falar do seu mundo."),
