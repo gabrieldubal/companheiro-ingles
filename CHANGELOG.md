@@ -12,6 +12,8 @@ tem aparece em Ajustes, no fim da página.
   aparecem na sessão, em Progresso, com link para abrir de novo.
 - Entender: toda aula guardada fica na lista, com a data e a nota, mesmo quando o erro ou o som
   sai dos mais frequentes. "Rever" abre a aula do jeito que estava.
+- Visual: o fundo ganhou um grão fino e uma luz suave no alto, e cada tela tem, lá em cima, a
+  linha de uma frase falada, bem clarinha.
 
 ## 2.1.0 (27/10/2026)
 
