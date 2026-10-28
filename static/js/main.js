@@ -2,6 +2,7 @@
 // e pode devolver uma função de limpeza, chamada ao sair dela.
 import { api, token } from "./lib/api.js";
 import { $, clear, h } from "./lib/dom.js";
+import * as theme from "./lib/theme.js";
 import * as tts from "./lib/tts.js";
 
 const ROUTES = {
@@ -79,7 +80,23 @@ async function refreshStatus() {
   } catch {}
 }
 
+// O botão de tema no menu mostra o tema para onde ele leva.
+function themeButton() {
+  const b = $("#theme-toggle");
+  if (!b) return;
+  const draw = () => {
+    const dark = theme.current() === "dark";
+    b.querySelector("use").setAttribute("href", dark ? "#i-sol" : "#i-lua");
+    b.querySelector("span").textContent = dark ? "Tema claro" : "Tema escuro";
+    b.setAttribute("aria-label", dark ? "Mudar para o tema claro" : "Mudar para o tema escuro");
+  };
+  b.onclick = theme.toggle;
+  window.addEventListener("themechange", draw);
+  draw();
+}
+
 async function start() {
+  themeButton();
   if (!token) {
     clear($("#view"), h("div", { class: "empty" },
       h("h2", "Abra pelo link do servidor"),

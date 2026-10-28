@@ -12,8 +12,11 @@ tem aparece em Ajustes, no fim da página.
   aparecem na sessão, em Progresso, com link para abrir de novo.
 - Entender: toda aula guardada fica na lista, com a data e a nota, mesmo quando o erro ou o som
   sai dos mais frequentes. "Rever" abre a aula do jeito que estava.
-- Visual: o fundo ganhou um grão fino e uma luz suave no alto, e cada tela tem, lá em cima, a
-  linha de uma frase falada, bem clarinha.
+- Tema claro ou escuro: botão no pé do menu, e em Ajustes > Aparência dá para escolher "do
+  sistema", claro ou escuro. Fica guardado no navegador.
+- Visual: o fundo ganhou um grão fino e luzes suaves nos cantos. No alto de cada tela passa a
+  onda de uma frase falada, no pé o espectrograma dela, e no canto os símbolos dos sons (ə, θ, æ,
+  ɪ), tudo bem clarinho, longe do meio da tela, onde fica o texto.
 
 ## 2.1.0 (27/10/2026)
 
