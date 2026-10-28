@@ -17,6 +17,9 @@ tem aparece em Ajustes, no fim da página.
 - Visual: o fundo ganhou um grão fino, luzes suaves nos cantos e, atrás de tudo, curvas de nível
   de um mapa, fixas e quase transparentes. No alto de cada tela passa a onda de uma frase falada;
   no pé do menu, o perfil da boca com a língua na posição do θ. Nada disso passa por baixo do texto.
+- Identidade visual (`IDENTIDADE.md`): o conceito "caderno de campo da fala", a marca nova (o θ
+  com a barra virando a onda de uma voz), as cores, os tipos, os motivos e as regras. O ícone do
+  app e o selo do menu passam a usar a marca nova (o antigo era um balão com "EN").
 
 ## 2.1.0 (27/10/2026)
 

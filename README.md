@@ -5,6 +5,9 @@ som, treina o ouvido, guarda os erros que se repetem, revisa tudo em cartões (c
 responde dúvidas com os seus dados e monta uma sessão por dia com o que mais precisa de treino.
 Cada pessoa roda no próprio computador, com os próprios dados.
 
+O visual segue o `IDENTIDADE.md` (o conceito, a marca, as cores, os tipos e os motivos): leia antes
+de mexer em qualquer tela.
+
 ## Como usar
 
 Dê dois cliques em `run.bat`. O navegador abre em `http://localhost:8790`, já com o código

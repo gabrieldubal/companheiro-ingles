@@ -12,7 +12,11 @@ export async function render(root, _params, alive) {
   let step = !st.brain ? 0 : !st.profile ? 1 : st.scenarios ? 3 : 2;
   const steps = h("ol", { class: "ladder", "aria-label": "Passos" });
   const stage = h("section", { class: "stage", style: { marginTop: "22px" } });
-  root.append(h("header",
+  const mark = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+  mark.setAttribute("class", "brand-mark");
+  mark.setAttribute("aria-hidden", "true");
+  mark.innerHTML = '<use href="#i-marca"/>'; // só a referência ao símbolo do index.html
+  root.append(h("header", mark,
     h("h1", "Boas-vindas ao Companheiro de inglês"),
     h("p", "Um laboratório de fala só seu: conversa por voz, pronúncia som a som, cartões de revisão e aulas com os seus " +
            "próprios erros. Tudo fica neste computador. Antes de começar, três passos rápidos."),
