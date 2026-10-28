@@ -1,0 +1,28 @@
+COMPANHEIRO DE INGLÊS
+
+Um laboratório de fala para treinar o inglês falado: conversa por voz com um tutor, pronúncia
+som a som, cartões de revisão e aulas feitas com os seus próprios erros. Roda no seu computador
+(Windows), e os seus dados ficam só nele.
+
+INSTALAR (uma vez)
+1. Descompacte esta pasta onde quiser (por exemplo, em Documentos).
+2. Dois cliques em instalar.bat. Leva de 10 a 30 minutos e baixa uns 2 GB.
+   Precisa de uns 4 GB livres no disco e, de preferência, 8 GB de memória.
+   Se o Windows avisar que o arquivo veio da internet, clique em "Mais informações" e
+   "Executar assim mesmo".
+
+USAR
+1. Dois cliques em abrir.bat. O navegador abre sozinho. Deixe a janela preta aberta.
+2. Na primeira vez, cole o código que você recebeu (começa com CI1-) e conte um pouco sobre você.
+3. Comece pela leitura em voz alta: em 10 minutos o app descobre quais sons você precisa treinar.
+
+Dicas: use o Microsoft Edge (tem as vozes mais naturais). Fone ajuda, mas não é obrigatório.
+Num lugar onde não dá para falar, escolha "Não posso falar" na tela Hoje.
+O que cada tela faz, em uma página: COMO-USAR.txt.
+
+ATUALIZAR
+Descompacte a versão nova por cima desta pasta e rode o instalar.bat de novo. Os seus dados
+ficam em %LOCALAPPDATA%\CompanheiroIngles e não são apagados.
+
+PROBLEMAS
+Tire um print da janela preta e mande para quem te passou o app.

@@ -1,0 +1,19 @@
+# Nada disto vai para repositório nem para o pacote dos amigos.
+.env
+data/
+.venv/
+__pycache__/
+*.pyc
+
+# Terraform: estado (tem os nomes e ARNs da sua conta), plugins e o zip da Lambda
+infra/terraform/.terraform/
+infra/terraform/build/
+infra/terraform/*.tfstate
+infra/terraform/*.tfstate.*
+infra/terraform/terraform.tfvars
+
+dist/
+
+# Seus: o perfil e o vocabulário da primeira instalação (o app usa as cópias em data/)
+/perfil.md
+/vocabulario.txt

@@ -1,0 +1,19 @@
+# Copie para terraform.tfvars e ajuste. O terraform.tfvars não deve ir para nenhum repositório.
+
+region      = "us-east-1"
+aws_profile = "companheiro" # o perfil do AWS CLI da conta nova
+
+# Claude no Bedrock. Escolha UMA forma de credencial (ou nenhuma, para usar o Bedrock desta conta):
+# bedrock_role_arn     = "arn:aws:iam::111122223333:role/companheiro-bedrock"  # opção 2
+# bedrock_secret_param = "/companheiro/bedrock"                                # opção 3
+# bedrock_region       = "us-east-1"
+# claude_model         = "anthropic.claude-opus-5-5"
+
+# Limite padrão por amigo e preços usados só para contar esse limite (confira a tabela do Bedrock):
+default_limit_usd  = 5
+price_in_per_mtok  = 4
+price_out_per_mtok = 20
+
+# Alerta por e-mail se a conta do intermediário passar de US$ 1 no mês (deveria ficar em zero):
+# alert_email       = "voce@exemplo.com"
+# alert_monthly_usd = 1

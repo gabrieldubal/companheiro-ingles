@@ -1,0 +1,13 @@
+fastapi
+uvicorn[standard]
+python-multipart
+faster-whisper
+cryptography
+qrcode
+anthropic
+# Detector de pronúncia (sem eles, o app funciona sem a pronúncia).
+# PyTorch para CPU:  .venv\Scripts\python.exe -m pip install torch --index-url https://download.pytorch.org/whl/cpu
+torch
+transformers
+cmudict
+wordfreq  # "soou como": só palavras comuns

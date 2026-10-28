@@ -1,0 +1,3 @@
+# Os .bat precisam de CRLF para o Windows rodar; o resto do texto segue o padrão do git.
+*.bat text eol=crlf
+tools/pacote/*.txt text eol=crlf

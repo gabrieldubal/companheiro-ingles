@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96">
+  <rect width="96" height="96" rx="22" fill="#2f6b4f"/>
+  <path d="M22 30a10 10 0 0 1 10-10h32a10 10 0 0 1 10 10v22a10 10 0 0 1-10 10H44l-14 12V62h2a10 10 0 0 1-10-10z" fill="#f4f1e8"/>
+  <text x="48" y="49" text-anchor="middle" font-family="system-ui,sans-serif" font-size="20" font-weight="700" fill="#2f6b4f">EN</text>
+</svg>

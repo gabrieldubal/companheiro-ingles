@@ -1,0 +1,39 @@
+COMO USAR O COMPANHEIRO DE INGLÊS
+
+TODO DIA
+Abra o app e vá em Hoje. Ele monta a sessão do dia (uns 15 minutos) em passos.
+Faça de cima para baixo: o passo da vez é o do botão verde. Pode parar quando quiser.
+Num lugar onde não dá para falar, escolha "Não posso falar" em Hoje: a sessão vira
+cartões, aulas, ouvir com fone e exercícios por escrito.
+
+PARA GRAVAR
+Aperte espaço (ou clique no microfone verde), fale e aperte espaço de novo.
+Na primeira vez, o navegador pede o microfone: clique em Permitir.
+
+AS TELAS
+Hoje          A sessão do dia e o som que você mais precisa treinar.
+Conversar     Conversa por voz com o tutor. Escolha um cenário e fale.
+              As correções aparecem embaixo da sua resposta.
+              No fim, clique em "Encerrar e ver o resumo".
+Pronúncia     Os seus sons, do que mais precisa de treino ao que já está bom, e os treinos:
+              - Frases para falar: leia em voz alta. Palavra sublinhada saiu com um
+                som trocado; clique nela para ver o quê.
+              - Corrigir: uma palavra difícil, do som sozinho até a frase.
+              - Ouvir a diferença: ouça e escolha qual palavra foi (ship ou sheep).
+              - Imitar: o nativo fala uma frase, você repete logo depois.
+              - Leitura em voz alta: 24 frases que medem os seus sons. Uma vez por mês.
+Fale certo    Frases que você disse errado nas conversas. Diga do jeito certo.
+Cartões       Revisão (como o Anki). Pense na resposta, vire com espaço e dê a nota
+              de 1 a 4.
+Entender      Aulas curtas sobre os seus erros, com exercício.
+Perguntar     Dúvidas de inglês. Ele também cria cartões e ajusta o seu treino.
+Meus erros    Tudo o que o app anotou, com a sua gravação de prova.
+Progresso     Os minutos de cada sessão e como cada som está mudando.
+Ajustes       Meta da semana, duração da sessão, voz do tutor e o seu perfil.
+
+DICAS
+- Comece pela Leitura em voz alta: é com ela que o app descobre os seus sons.
+- Use o Microsoft Edge: tem as vozes em inglês mais naturais.
+- Fale em volume normal, perto do microfone. Fone ajuda, mas não é obrigatório.
+- Conte no Perfil (em Ajustes) o que você faz e do que gosta: o tutor usa isso.
+- Um pouco todo dia rende mais que muito uma vez por semana.

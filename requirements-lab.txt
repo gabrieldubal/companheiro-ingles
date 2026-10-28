@@ -1,0 +1,2 @@
+# Só para lab/nativos.py (lê a amostra do LibriSpeech). O resto está em requirements.txt.
+pyarrow
