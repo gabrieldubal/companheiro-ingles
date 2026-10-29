@@ -61,6 +61,39 @@ escolhe o próprio caminho em `COMPANHEIRO_LLM`: `cli` usa o Claude Code instala
 `api` usa uma chave da Anthropic, e `proxy` usa um intermediário que você mesmo sobe na sua conta
 AWS com o Terraform de `infra/`.
 
+### Experimentar sem nenhuma chave
+
+A pronúncia é toda local: nenhum áudio e nenhum texto saem da máquina, e nenhuma chave é
+necessária. No Windows, a partir de um clone:
+
+```
+uv venv --python 3.12 .venv
+uv pip install --python .venv\Scripts\python.exe torch --index-url https://download.pytorch.org/whl/cpu
+uv pip install --python .venv\Scripts\python.exe -r requirements.txt
+.venv\Scripts\python -m app.preparar
+run.bat --demo
+```
+
+Sem o `uv`, vale o `python -m venv .venv` e o `pip` desse ambiente, na mesma ordem. O `--demo`
+liga o app inteiro: Frases para falar, Pronúncia, Imitar, Ouvir a diferença, Cartões e Progresso
+funcionam de verdade; as partes que precisam do Claude (Conversar, Perguntar, Entender e os textos
+"do seu mundo") respondem com um texto de demonstração, marcado como tal. Para ligar um Claude de
+verdade, veja a seção anterior.
+
+Os modelos de voz são baixados uma vez pelo `app.preparar`, do Hugging Face, para o cache padrão
+da máquina (`~/.cache/huggingface/hub`), e rodam em CPU:
+
+| Modelo | Para quê | Download |
+|---|---|---|
+| `Systran/faster-whisper-small.en` (Whisper, pelo faster-whisper, em int8) | fala para texto, com o tempo de cada palavra | uns 460 MB |
+| `facebook/wav2vec2-lv-60-espeak-cv-ft` (Meta) | os sons que saíram, no alfabeto fonético | uns 1,2 GB |
+
+Mais o CMUdict (a pronúncia esperada de cada palavra) e o wordfreq (a frequência das palavras,
+para o "soou como"), que vêm com o `pip`. Nenhum dos dois modelos foi treinado de novo: o app usa
+os pesos públicos como estão. O que é deste projeto vem depois deles: o alinhamento entre o som
+esperado e o ouvido, as regras que separam erro de ruído e as taxas de referência medidas em
+nativos (`lab/nativos.py`), tudo em `app/pron.py`.
+
 ### Como foi construído
 
 Com o Claude Code como par de programação. A minha parte foi o problema, as decisões e a
