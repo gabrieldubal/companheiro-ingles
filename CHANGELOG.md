@@ -8,8 +8,9 @@ tem aparece em Ajustes, no fim da página.
 
 - Empacotador: as palavras proibidas que são só suas (nomes de projeto, de cliente) saem do código e
   passam a ser lidas de `tools/proibidos.local.txt`, que fica fora do repositório.
-- Repositório: licença MIT, abertura do README para quem chega de fora e três capturas de tela em
-  `docs/capturas/` (nada disso vai no zip).
+- Repositório: licença MIT, abertura do README para quem chega de fora (com a seção "Experimentar sem
+  nenhuma chave": passos, modelos de voz e tamanhos) e três capturas de tela em `docs/capturas/`
+  (nada disso vai no zip).
 - Cartões: dá para escrever a resposta antes de virar. O app confere, marca o que não bateu e
   sugere a nota (Enter aceita). Responder de cabeça continua como opção.
 - Entender: a aula avisa que salvou quando você responde a última pergunta, e as aulas feitas
