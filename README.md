@@ -9,6 +9,66 @@ Cada pessoa roda no próprio computador, com os próprios dados; para passar aos
 O visual segue o `IDENTIDADE.md` (o conceito, a marca, as cores, os tipos e os motivos): leia antes
 de mexer em qualquer tela.
 
+## Para quem chega de fora
+
+Projeto pessoal, feito em três dias (26 a 28 de outubro de 2026) para um problema meu: leio
+inglês técnico sem esforço e travo na hora de falar. Em vez de um curso, um instrumento de
+medida. O app ouve o que eu falo, compara som a som com o que um nativo faria e monta o treino
+do dia a partir do que saiu diferente. Está em uso diário e pronto para rodar no computador de
+amigos, cada um com os próprios dados.
+
+![Pronúncia: as palavras em que um som saiu trocado e, ao lado, cada som com a sua taxa contra a dos nativos](docs/capturas/pronuncia.png)
+
+*Pronúncia: as palavras em que um som saiu trocado e, ao lado, cada som com a sua taxa contra a dos nativos.*
+
+![Frases para falar: a frase do dia, o nativo devagar e o microfone](docs/capturas/frases.png)
+
+*Frases para falar: você lê, o app compara som a som e marca a palavra em que algo saiu diferente.*
+
+![Progresso: minutos por sessão e a taxa de cada som, sessão a sessão](docs/capturas/progresso.png)
+
+*Progresso: por sessão, o que cada estudo rendeu; a linha reta é a taxa dos nativos.*
+
+### O que tem dentro
+
+- **Interface:** HTML e JavaScript puro, em módulos ES, com roteador por hash e uma tela por
+  arquivo em `static/js/views/`. Sem framework e sem build. Tema claro e escuro, responsiva de
+  375 a 2560 px.
+- **Servidor:** FastAPI e SQLite, com migrações que rodam ao ligar e backup diário do banco.
+- **Voz, em CPU:** o Whisper `small.en` dá o texto e o tempo de cada palavra; um modelo wav2vec2
+  de fonemas dá os sons que saíram. O alinhamento com o CMUdict e um conjunto de regras diz o que
+  mudou e onde. O detector foi validado com 214 falas de nativos (CMU ARCTIC e LibriSpeech): o
+  ruído ficou em no máximo 2,5% por som, e um som só vira "treinar" quando o intervalo de
+  confiança (Wilson, 95%) fica acima do teto dos nativos.
+- **LLM:** o Claude entra em seis lugares: o tutor da conversa, a etiqueta de cada erro, o
+  julgamento de uma correção dita de volta, as aulas de Entender, os cenários e textos "do seu
+  mundo", e o Perguntar, que responde com os seus dados e executa ações (criar cartão, guardar
+  palavra, mudar o som da vez) com desfazer. Três formas de ligar: o Claude Code da máquina, a
+  API da Anthropic ou o intermediário abaixo.
+- **Memória:** cartões com FSRS-4.5; gramática em caixas de Leitner; a sessão do dia ordena os
+  sons pela distância até os nativos, com peso maior para o que mais atrapalha o entendimento.
+- **Intermediário para amigos (`infra/`):** uma Lambda com URL própria, DynamoDB com uma chave
+  por pessoa (guardada como hash) e teto mensal em dólar, chamada ao Bedrock assinada com SigV4,
+  tudo em Terraform e dentro do nível gratuito da AWS.
+- **Distribuição:** `empacotar.bat` gera um zip com instalador (uv, Python 3.12, PyTorch de CPU)
+  e recusa qualquer segredo ou dado pessoal; `VERSION` e `CHANGELOG.md` acompanham.
+
+### O que é livre e o que não é
+
+O código é livre, sob a licença MIT. A IA não vem junto: o intermediário que paga o Claude é
+privado, exige uma chave por pessoa e o endereço dele não está neste repositório. Quem clonar
+escolhe o próprio caminho em `COMPANHEIRO_LLM`: `cli` usa o Claude Code instalado na máquina,
+`api` usa uma chave da Anthropic, e `proxy` usa um intermediário que você mesmo sobe na sua conta
+AWS com o Terraform de `infra/`.
+
+### Como foi construído
+
+Com o Claude Code como par de programação. A minha parte foi o problema, as decisões e a
+revisão: o que medir e como, as regras do detector e o teto de ruído aceitável, o que cada tela
+mostra e o que não mostra, o conceito visual do `IDENTIDADE.md`, a forma de distribuir sem expor
+credenciais. A parte dele foi a maior parte do código. Duas revisões de olhos frescos, feitas por
+outro agente sobre o código recém-escrito, acharam 22 bugs reais, todos corrigidos antes do uso.
+
 ## Como usar
 
 Dê dois cliques em `run.bat`. O navegador abre em `http://localhost:8790`, já com o código
@@ -279,6 +339,9 @@ largura real do cartão, com o texto sempre do mesmo tamanho.
 | `infra/` | O intermediário dos amigos: Lambda, Terraform e o script das chaves (`infra/LEIAME.md`) |
 | `lab/` | Relatório do detector (`fonemas.py`) e validação com nativos (`nativos.py`) |
 | `data/backups/` | Cópia do banco antes da versão 2 |
+| `LICENSE` | MIT para o código; as fontes têm a OFL em `static/fonts/` |
+| `docs/capturas/` | As telas do início deste README (não vão no zip dos amigos) |
+| `tools/proibidos.local.txt` | Palavras suas que o empacotador não deixa ir no zip (fora do repositório) |
 
 ## Ajustes por variável de ambiente
 

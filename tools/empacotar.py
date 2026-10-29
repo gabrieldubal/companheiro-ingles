@@ -27,7 +27,11 @@ INCLUDE_FILES = ["requirements.txt"]
 EXTRA = ROOT / "tools" / "pacote"
 FORBIDDEN_NAMES = {".env", "perfil.md", "vocabulario.txt", "proxy.json", "token.txt", "cenarios.json", "companheiro.db",
                    "terraform.tfvars", "run.bat", "celular.bat"}
-FORBIDDEN_TEXT = ["RoofScan", "AKIA", "BEDROCK_SECRET", "eqtlab", "Gabriel"]  # nada disso pode ir no código
+FORBIDDEN_TEXT = ["AKIA", "BEDROCK_SECRET", "Gabriel"]  # nada disso pode ir no código
+# Palavras só suas (nomes de projeto, de cliente): uma por linha em tools/proibidos.local.txt, que fica fora do git.
+_LOCAL = ROOT / "tools" / "proibidos.local.txt"
+if _LOCAL.exists():
+    FORBIDDEN_TEXT += [w.strip() for w in _LOCAL.read_text(encoding="utf-8").splitlines() if w.strip() and not w.startswith("#")]
 
 
 def files():

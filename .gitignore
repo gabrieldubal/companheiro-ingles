@@ -17,3 +17,6 @@ dist/
 # Seus: o perfil e o vocabulário da primeira instalação (o app usa as cópias em data/)
 /perfil.md
 /vocabulario.txt
+
+# Palavras proibidas só suas (o empacotador lê, o repositório não vê)
+tools/proibidos.local.txt
